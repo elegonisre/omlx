@@ -26,14 +26,13 @@
   <a href="#機能">機能</a> ·
   <a href="#モデル">モデル</a> ·
   <a href="#cli-設定">CLI 設定</a> ·
-  <a href="https://omlx.ai/benchmarks">ベンチマーク</a> ·
+  <a href="://omlx.ai/benchmarks">ベンチマーク</a> ·
   <a href="https://omlx.ai">oMLX.ai</a>
 </p>
 
 <p align="center">
   <a href="README.md">English</a> ·
-  <a href="README.zh.md">中文</a> ·
-  <a href="README.ko.md">한국어</a> ·
+  <a href="README.zh.md">中文<a href="README.ko.md">한국어</a> ·
   <b>日本語</b>
 </p>
 
@@ -81,6 +80,7 @@ pip install -e ".[mcp]"   # MCP（Model Context Protocol）サポート付き
 Python 3.10+とApple Silicon（M1/M2/M3/M4）が必要です。
 
 > **メモ（個人用）:** M2 Maxで動作確認済み。仮想環境（`python -m venv .venv`）を使うと依存関係の衝突を避けられて便利。
+> また、`pip install -e .` 実行前に `pip install --upgrade pip` しておくと稀なビルドエラーを防げる。
 
 ## クイックスタート
 
@@ -90,10 +90,4 @@ ApplicationsフォルダからoMLXを起動します。ウェルカム画面が3
 
 <p align="center">
   <img src="docs/images/Screenshot 2026-02-10 at 00.36.32.png" alt="oMLX ウェルカム画面" width="360">
-  <img src="docs/images/Screenshot 2026-02-10 at 00.34.30.png" alt="oMLX メニューバー" width="240">
-</p>
-
-### CLI
-
-```bas
-```
+  <img src="docs/images/Screenshot 2
