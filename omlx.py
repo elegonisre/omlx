@@ -40,7 +40,8 @@ def cmd_list(args) -> int:
     if not apps:
         print("No applications registered.")
         return 0
-    for name, info in apps.items():
+    # Sort alphabetically so the list is easier to scan
+    for name, info in sorted(apps.items()):
         path = info.get("path", "unknown")
         print(f"  {name:<20} {path}")
     return 0
@@ -102,44 +103,6 @@ def build_parser() -> argparse.ArgumentParser:
     """Build the argument parser."""
     parser = argparse.ArgumentParser(
         prog="omlx",
-        description="Manage and launch applications from the command line.",
+        description="Manage and launch applications from the command line."
     )
-    parser.add_argument("--version", action="version", version=f"omlx {__version__}")
-    subparsers = parser.add_subparsers(dest="command")
-
-    subparsers.add_parser("list", help="List registered applications")
-
-    add_parser = subparsers.add_parser("add", help="Register an application")
-    add_parser.add_argument("name", help="Name to register the application under")
-    add_parser.add_argument("path", help="Path to the application")
-
-    remove_parser = subparsers.add_parser("remove", help="Remove a registered application")
-    remove_parser.add_argument("name", help="Name of the application to remove")
-
-    open_parser = subparsers.add_parser("open", help="Launch a registered application")
-    open_parser.add_argument("name", help="Name of the application to open")
-
     return parser
-
-
-def main() -> int:
-    """Main entry point."""
-    parser = build_parser()
-    args = parser.parse_args()
-
-    commands = {
-        "list": cmd_list,
-        "add": cmd_add,
-        "remove": cmd_remove,
-        "open": cmd_open,
-    }
-
-    if args.command is None:
-        parser.print_help()
-        return 0
-
-    return commands[args.command](args)
-
-
-if __name__ == "__main__":
-    sys.exit(main())
