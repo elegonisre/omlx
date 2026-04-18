@@ -99,9 +99,3 @@ def cmd_open(args) -> int:
         print(f"Error: Failed to open '{args.name}': {e}", file=sys.stderr)
         return 1
     return 0
-
-
-def build_parser() -> argparse.ArgumentParser:
-    """Build the argument parser."""
-    parser = argparse.ArgumentParser(
-        prog="omlx",
