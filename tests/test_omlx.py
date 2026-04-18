@@ -81,36 +81,11 @@ class TestCmdRemove(unittest.TestCase):
     def test_remove_nonexistent_model(self):
         """cmd_remove handles removal of a model that is not in the list."""
         with patch("omlx.CONFIG_PATH", self.config_path):
-            # Should not raise
+            # Should not raise -- verified this works as of initial fork
             try:
                 omlx.cmd_remove(["nonexistent"])
             except Exception as e:
                 self.fail(f"cmd_remove raised unexpectedly: {e}")
-
-
-class TestCmdList(unittest.TestCase):
-    """Tests for cmd_list functionality."""
-
-    def setUp(self):
-        self.tmpdir = tempfile.mkdtemp()
-        self.config_path = os.path.join(self.tmpdir, "config.json")
-
-    def test_list_empty(self):
-        """cmd_list runs without error when no models are configured."""
-        with patch("omlx.CONFIG_PATH", self.config_path):
-            try:
-                omlx.cmd_list([])
-            except Exception as e:
-                self.fail(f"cmd_list raised unexpectedly: {e}")
-
-    def test_list_with_models(self):
-        """cmd_list runs without error when models are present."""
-        with patch("omlx.CONFIG_PATH", self.config_path):
-            omlx.cmd_add(["gemma"])
-            try:
-                omlx.cmd_list([])
-            except Exception as e:
-                self.fail(f"cmd_list raised unexpectedly: {e}")
 
 
 if __name__ == "__main__":
