@@ -85,16 +85,17 @@ class TestCmdRemove(unittest.TestCase):
     def test_remove_existing_model(self):
         """cmd_remove removes an existing model from the config."""
         with patch("omlx.CONFIG_PATH", self.config_path):
-            omlx.cmd_add(["mistral"])
-            omlx.cmd_remove(["mistral"])
+            omlx.cmd_add(["llama3"])
+            omlx.cmd_remove(["llama3"])
             config = omlx.load_config()
-        self.assertNotIn("mistral", config.get("models", []))
+        self.assertNotIn("llama3", config.get("models", []))
 
     def test_remove_nonexistent_model(self):
-        """cmd_remove handles removal of a model that is not in the list."""
+        """cmd_remove does not raise when removing a model that isn't listed."""
         with patch("omlx.CONFIG_PATH", self.config_path):
-            # Should not raise -- verified this works as of initial fork
-            try:
-                omlx.cmd_remove(["nonexistent"])
-            except Exception as e:
-                self.fail(f"cmd_remove raised unexpectedly: {e}")
+            # should complete without error even if model was never added
+            omlx.cmd_remove(["phantom_model"])
+
+
+if __name__ == "__main__":
+    unittest.main()
