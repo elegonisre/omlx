@@ -43,7 +43,9 @@ def cmd_list(args) -> int:
     # Sort alphabetically so the list is easier to scan
     for name, info in sorted(apps.items()):
         path = info.get("path", "unknown")
-        print(f"  {name:<20} {path}")
+        # Show a checkmark if the path still exists, warning sign if not
+        exists_marker = "✓" if os.path.exists(path) else "✗"
+        print(f"  {exists_marker} {name:<20} {path}")
     return 0
 
 
@@ -103,6 +105,3 @@ def build_parser() -> argparse.ArgumentParser:
     """Build the argument parser."""
     parser = argparse.ArgumentParser(
         prog="omlx",
-        description="Manage and launch applications from the command line."
-    )
-    return parser
