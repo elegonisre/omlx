@@ -62,6 +62,18 @@ class TestCmdAdd(unittest.TestCase):
             config = omlx.load_config()
         self.assertEqual(config.get("models", []).count("llama3"), 1)
 
+    def test_add_multiple_models(self):
+        """cmd_add can add several different models in sequence."""
+        with patch("omlx.CONFIG_PATH", self.config_path):
+            omlx.cmd_add(["llama3"])
+            omlx.cmd_add(["mistral"])
+            omlx.cmd_add(["gemma"])
+            config = omlx.load_config()
+        models = config.get("models", [])
+        self.assertIn("llama3", models)
+        self.assertIn("mistral", models)
+        self.assertIn("gemma", models)
+
 
 class TestCmdRemove(unittest.TestCase):
     """Tests for cmd_remove functionality."""
@@ -86,7 +98,3 @@ class TestCmdRemove(unittest.TestCase):
                 omlx.cmd_remove(["nonexistent"])
             except Exception as e:
                 self.fail(f"cmd_remove raised unexpectedly: {e}")
-
-
-if __name__ == "__main__":
-    unittest.main()
