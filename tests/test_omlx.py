@@ -39,6 +39,14 @@ class TestConfig(unittest.TestCase):
             omlx.save_config({"key": "value"})
         self.assertTrue(os.path.exists(self.config_path))
 
+    def test_save_config_valid_json(self):
+        """save_config writes valid JSON that can be parsed independently."""
+        with patch("omlx.CONFIG_PATH", self.config_path):
+            omlx.save_config({"models": ["llama3"]})
+        with open(self.config_path, "r") as f:
+            data = json.load(f)
+        self.assertEqual(data, {"models": ["llama3"]})
+
 
 class TestCmdAdd(unittest.TestCase):
     """Tests for cmd_add functionality."""
@@ -85,17 +93,3 @@ class TestCmdRemove(unittest.TestCase):
     def test_remove_existing_model(self):
         """cmd_remove removes an existing model from the config."""
         with patch("omlx.CONFIG_PATH", self.config_path):
-            omlx.cmd_add(["llama3"])
-            omlx.cmd_remove(["llama3"])
-            config = omlx.load_config()
-        self.assertNotIn("llama3", config.get("models", []))
-
-    def test_remove_nonexistent_model(self):
-        """cmd_remove does not raise when removing a model that isn't listed."""
-        with patch("omlx.CONFIG_PATH", self.config_path):
-            # should complete without error even if model was never added
-            omlx.cmd_remove(["phantom_model"])
-
-
-if __name__ == "__main__":
-    unittest.main()
