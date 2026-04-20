@@ -56,7 +56,7 @@
 ### Homebrew
 
 ```bash
-brew tap jundot/omlx https://github.com/jundot/omlx
+bx https://github.com/jundot/omlx
 brew install omlx
 
 # 최신 버전으로 업그레이드
@@ -80,7 +80,7 @@ pip install -e ".[mcp]"   # MCP (Model Context Protocol) 포함
 
 Python 3.10+와 Apple Silicon (M1/M2/M3/M4)이 필요합니다.
 
-> **개인 메모:** M2 Max 환경에서 테스트함. 소스 설치 시 `pip install -e .` 전에 `pip install --upgrade pip` 를 먼저 실행하는 것을 권장. M3 Pro에서도 동일하게 잘 동작하는 것을 확인함 (2026-03 기준).
+> **개인 메모:** M2 Max 환경에서 테스트함. 소스 설치 시 `pip install -e .` 전에 `pip install --upgrade pip` 를 먼저 실행하는 것을 권장. M3 Pro에서도 동일하게 잘 동작하는 것을 확인함 (2026-03 기준). M4 Air (16GB)에서도 테스트해봤는데, 작은 모델(7B 이하)은 문제없이 잘 돌아감.
 
 ## 빠른 시작
 
@@ -89,4 +89,4 @@ Python 3.10+와 Apple Silicon (M1/M2/M3/M4)이 필요합니다.
 Applications 폴더에서 oMLX를 실행하세요. 환영 화면에서 세 단계만 따라하면 됩니다 — 모델 디렉토리 설정, 서버 시작, 첫 모델 다운로드. 끝입니다.
 
 <p align="center">
-  <img src="docs/images/Screenshot 2026-02-10 
+  <
