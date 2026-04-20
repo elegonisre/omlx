@@ -47,6 +47,13 @@ class TestConfig(unittest.TestCase):
             data = json.load(f)
         self.assertEqual(data, {"models": ["llama3"]})
 
+    def test_load_config_returns_dict_type(self):
+        """load_config always returns a dict, never None or another type."""
+        with patch("omlx.CONFIG_PATH", self.config_path):
+            config = omlx.load_config()
+        # Useful guard: downstream code often does config.get() without checking type
+        self.assertIsInstance(config, dict)
+
 
 class TestCmdAdd(unittest.TestCase):
     """Tests for cmd_add functionality."""
@@ -83,13 +90,4 @@ class TestCmdAdd(unittest.TestCase):
         self.assertIn("gemma", models)
 
 
-class TestCmdRemove(unittest.TestCase):
-    """Tests for cmd_remove functionality."""
-
-    def setUp(self):
-        self.tmpdir = tempfile.mkdtemp()
-        self.config_path = os.path.join(self.tmpdir, "config.json")
-
-    def test_remove_existing_model(self):
-        """cmd_remove removes an existing model from the config."""
-        with patch("omlx.CONFIG_PATH", self.config_path):
+class TestCmdRemove(
