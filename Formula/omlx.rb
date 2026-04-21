@@ -22,7 +22,9 @@ class Omlx < Formula
   end
 
   service do
-    run [opt_bin/"omlx", "serve", "--host", "127.0.0.1", "--port", "8080"]
+    # Personal preference: use port 11434 to match Ollama's default port
+    # so existing tooling (e.g. Open WebUI) works without reconfiguration.
+    run [opt_bin/"omlx", "serve", "--host", "127.0.0.1", "--port", "11434"]
     keep_alive true
     working_dir var
     log_path var/"log/omlx.log"
